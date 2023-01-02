@@ -18,8 +18,9 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 function App() {
+  const canvasSize = 250;
   const setup = (p5: P5, canvasParentRef: Element) => {
-    p5.createCanvas(500, 500).parent(canvasParentRef);
+    p5.createCanvas(canvasSize, canvasSize).parent(canvasParentRef);
   };
 
   const [regen, setRegen] = useState(1);
