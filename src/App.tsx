@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import P5 from "p5";
+import Waves from "./Waves";
+import "./App.css";
+import "./Aesthetic.css";
+import TiltedLines from "./TiltedLines";
 
 function App() {
+  const setup = (p5: P5, canvasParentRef: Element) => {
+    p5.createCanvas(500, 500).parent(canvasParentRef);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      {/* <div className="aesthetic-windows-xp-modal-title-bar">Title</div> */}
+      <div className="">
+        {/* <Waves setup={setup} size={500} /> */}
+        <TiltedLines setup={setup} size={500} />
+      </div>
     </div>
   );
 }
