@@ -8,6 +8,7 @@ export default function TiltedLines(props) {
   var step = 20;
   var border = 0;
   let scale = 500;
+  let r = props.regen;
 
   const options = [
     { value: "chocolate", label: "Chocolate" },
@@ -44,6 +45,7 @@ export default function TiltedLines(props) {
         artist(p5, x, y, step, step);
       }
     }
+    props.regen;
     p5.noLoop();
   };
   return <Sketch setup={props.setup} draw={draw} />;

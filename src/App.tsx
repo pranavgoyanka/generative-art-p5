@@ -9,26 +9,50 @@ import {
   CardBody,
   Heading,
   Container,
+  Box,
+  VStack,
+  Spacer,
+  Button,
+  Stack,
+  useControllableState,
 } from "@chakra-ui/react";
+import { useState } from "react";
 function App() {
   const setup = (p5: P5, canvasParentRef: Element) => {
     p5.createCanvas(500, 500).parent(canvasParentRef);
   };
 
-  return (
-    <Container>
-      <Card>
-        <CardHeader>
-          <Heading size="md">Waves</Heading>
-        </CardHeader>
+  const [regen, setRegen] = useState(1);
+  // const [value, setValue] = useControllableState({  40 });
 
-        <CardBody>
-          {/* <Text>View a summary of all your customers over the last month.</Text> */}
-          <TiltedLines setup={setup} size={500} />
-          {/* <Waves setup={setup} size={500} /> */}
-        </CardBody>
-      </Card>
-    </Container>
+  return (
+    <VStack>
+      <Box bg="#E9D8FD" w="100%" p={4} color="black">
+        Generative Art
+      </Box>
+      <Spacer />
+      <Container>
+        <Card align="center">
+          <CardHeader>
+            <Heading size="lg">Waves</Heading>
+          </CardHeader>
+
+          <CardBody>
+            {/* <TiltedLines setup={setup} size={500} /> */}
+            <Waves setup={setup} size={500} regen={regen} />
+          </CardBody>
+        </Card>
+        <Stack direction="row" spacing={4}>
+          {/* <Button
+            colorScheme="purple"
+            variant="outline"
+            onClick={() => setRegen(1 + regen)}
+          >
+            Generate
+          </Button> */}
+        </Stack>
+      </Container>
+    </VStack>
   );
 }
 
