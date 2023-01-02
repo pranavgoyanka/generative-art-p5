@@ -8,13 +8,13 @@ export default function Waves(props) {
 
   function createLines(p5, step) {
     // create lines full of points
-
-    for (let i = step; i < props.size; i += step) {
+    p5.strokeWeight(1.5);
+    for (let i = 0; i < props.size; i += step) {
       console.log(i);
       let ln = [];
 
       for (let j = step; j <= wdt - step; j += step) {
-        let point = { x: j, y: i + (p5.random() * step) / 2 };
+        let point = { x: j, y: i + p5.random() * step };
         ln.push(point);
         console.log(point);
       }
@@ -42,8 +42,8 @@ export default function Waves(props) {
     // Draw with p5.js things
     p5.background("fff");
     p5.strokeWeight(1);
-    createLines(p5, (10 * props.size) / 400);
-    createLines(p5, (20 * props.size) / 400);
+    createLines(p5, (10 * props.size) / 240);
+    createLines(p5, (20 * props.size) / 240);
     p5.noLoop();
   };
 

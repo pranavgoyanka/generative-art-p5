@@ -5,7 +5,7 @@ import Select from "react-select";
 
 export default function TiltedLines(props) {
   var enableDegeneration = true;
-  var step = 15;
+  var step = 20;
   var border = 0;
   let scale = 500;
 
@@ -27,8 +27,8 @@ export default function TiltedLines(props) {
 
   const draw = (p5: P5) => {
     p5.background("fff");
-    for (var x = border; x <= scale - border; x += step) {
-      for (var y = border; y <= scale - border; y += step) {
+    for (var x = border; x < scale - border; x += step) {
+      for (var y = border; y < scale - border; y += step) {
         if (enableDegeneration) {
           var rectWidth = Math.random() * 100;
           if (
@@ -46,12 +46,5 @@ export default function TiltedLines(props) {
     }
     p5.noLoop();
   };
-  return (
-    <div>
-      <div className="frame">
-        <Sketch setup={props.setup} draw={draw} />
-      </div>
-      <Select options={options} />
-    </div>
-  );
+  return <Sketch setup={props.setup} draw={draw} />;
 }
