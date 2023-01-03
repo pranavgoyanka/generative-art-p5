@@ -17,6 +17,7 @@ import {
   useControllableState,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import Art from "./Art";
 function App() {
   const canvasSize = 250;
   const setup = (p5: P5, canvasParentRef: Element) => {
@@ -24,6 +25,8 @@ function App() {
   };
 
   const [regen, setRegen] = useState(1);
+  const [artName, setArtName] = useState(0);
+  const artworkCount = 2;
   // const [value, setValue] = useControllableState({  40 });
 
   return (
@@ -33,21 +36,26 @@ function App() {
       </Box>
       <Spacer />
       <Container>
-        <Card align="center">
-          <CardHeader>
-            <Heading size="lg">Waves</Heading>
-          </CardHeader>
-
-          <CardBody>
-            {/* <TiltedLines setup={setup} size={500} /> */}
-            <Waves setup={setup} size={500} regen={regen} />
-          </CardBody>
-        </Card>
+        <Art
+          setup={setup}
+          artName={artName}
+          artworkCount={artworkCount}
+          regen={regen}
+        />
         <Stack direction="row" spacing={4}>
+          <Button
+            colorScheme="purple"
+            variant="outline"
+            onClick={() => setArtName((1 + artName) % artworkCount)}
+          >
+            Next
+          </Button>
           {/* <Button
             colorScheme="purple"
             variant="outline"
-            onClick={() => setRegen(1 + regen)}
+            onClick={() => {
+              this.forceUpdate();
+            }}
           >
             Generate
           </Button> */}
