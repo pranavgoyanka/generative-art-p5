@@ -12,9 +12,10 @@ import { useEffect } from "react";
 
 export default function Waves(props) {
   let lines = [];
-  const { regen, setRegen } = props;
-  const wdt = props.size;
+  const { regen, setRegen, size } = props;
+
   useEffect(() => {
+    // regenerates artwork by removing Sketch and drawing it again
     setRegen(true);
   }, [regen]);
 
@@ -24,7 +25,7 @@ export default function Waves(props) {
     for (let i = step; i < props.size; i += step) {
       let ln = [];
 
-      for (let j = 0; j <= wdt - step; j += step) {
+      for (let j = 0; j <= size - step; j += step) {
         let point = { x: j, y: i + p5.random() * step };
         ln.push(point);
       }
