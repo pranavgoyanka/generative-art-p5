@@ -11,7 +11,6 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { RepeatIcon } from "@chakra-ui/icons";
 
 export default function TiltedLines(props) {
   const [enableDegeneration, setEnableDegeneration] = useState(true);
@@ -39,8 +38,8 @@ export default function TiltedLines(props) {
   }
   let draw = (p5: P5) => {
     p5.background("fff");
-    for (var x = border; x < scale - border; x += step) {
-      for (var y = border; y < scale - border; y += step) {
+    for (var x = 0; x <= scale; x += step) {
+      for (var y = 0; y <= scale; y += step) {
         if (enableDegeneration) {
           var rectWidth = Math.random() * 100;
           if (

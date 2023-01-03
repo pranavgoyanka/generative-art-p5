@@ -15,6 +15,7 @@ import {
   Button,
   Stack,
   useControllableState,
+  Center,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import Art from "./Art";
@@ -23,6 +24,7 @@ import {
   ChevronRightIcon,
   RepeatIcon,
 } from "@chakra-ui/icons";
+import ControlPanel from "./ControlPanel";
 function App() {
   const canvasSize = 250;
   const setup = (p5: P5, canvasParentRef: Element) => {
@@ -32,50 +34,33 @@ function App() {
   const [regen, setRegen] = useState(true);
   const [artName, setArtName] = useState(0);
   const artworkCount = 2;
-  // const [value, setValue] = useControllableState({  40 });
+
+  const controlPanelProps = {
+    regen,
+    setRegen,
+    artName,
+    setArtName,
+    artworkCount,
+  };
+
+  const artProps = {
+    setup,
+    artName,
+    artworkCount,
+    regen,
+    setRegen,
+  };
 
   return (
     <VStack>
-      <Box bg="#E9D8FD" w="100%" p={4} color="black">
+      <Box bg="#E9D8FD" w="100%" p={4} color="black" textAlign={"center"}>
         Generative Art
       </Box>
       <Spacer />
       <Container>
-        <Art
-          setup={setup}
-          artName={artName}
-          artworkCount={artworkCount}
-          regen={regen}
-          setRegen={setRegen}
-        />
-        <Stack direction="row" spacing={4}>
-          {/* <Button
-            colorScheme="purple"
-            variant="outline"
-            onClick={() => setArtName((1 + artName) % artworkCount)}
-          >
-            Next
-          </Button> */}
-          <RepeatIcon onClick={() => setRegen(false)} boxSize={5} />
-          <ChevronLeftIcon
-            onClick={() => setArtName(Math.abs(artName - 1) % artworkCount)}
-            boxSize={6}
-          />
-          <ChevronRightIcon
-            onClick={() => setArtName((1 + artName) % artworkCount)}
-            boxSize={6}
-          />
-          {/* <Button
-            colorScheme="purple"
-            variant="outline"
-            onClick={() => {
-              this.forceUpdate();
-            }}
-          >
-            Generate
-          </Button> */}
-        </Stack>
+        <Art {...artProps} />
       </Container>
+      <ControlPanel {...controlPanelProps} />
     </VStack>
   );
 }

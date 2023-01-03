@@ -21,14 +21,12 @@ export default function Waves(props) {
   function createLines(p5, step) {
     // create lines full of points
     p5.strokeWeight(1.5);
-    for (let i = 0; i < props.size; i += step) {
-      console.log(i);
+    for (let i = step; i < props.size; i += step) {
       let ln = [];
 
-      for (let j = step; j <= wdt - step; j += step) {
+      for (let j = 0; j <= wdt - step; j += step) {
         let point = { x: j, y: i + p5.random() * step };
         ln.push(point);
-        console.log(point);
       }
       lines.push(ln);
     }
