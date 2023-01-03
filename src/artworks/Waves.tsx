@@ -8,10 +8,15 @@ import {
   CardBody,
   CardFooter,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 
 export default function Waves(props) {
   let lines = [];
+  const { regen, setRegen } = props;
   const wdt = props.size;
+  useEffect(() => {
+    setRegen(true);
+  }, [regen]);
 
   function createLines(p5, step) {
     // create lines full of points
@@ -61,7 +66,7 @@ export default function Waves(props) {
       </CardHeader>
 
       <CardBody>
-        <Sketch setup={props.setup} draw={draw} />
+        {regen ? <Sketch setup={props.setup} draw={draw} /> : <></>}
       </CardBody>
       <CardFooter>
         {props.artName}/{props.artworkCount}
