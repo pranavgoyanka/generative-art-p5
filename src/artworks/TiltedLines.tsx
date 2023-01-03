@@ -1,6 +1,5 @@
 import Sketch from "react-p5";
 import P5 from "p5";
-import "./App.css";
 import Select from "react-select";
 import {
   Card,
@@ -8,10 +7,16 @@ import {
   Heading,
   CardBody,
   CardFooter,
+  Checkbox,
+  Button,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { RepeatIcon } from "@chakra-ui/icons";
 
 export default function TiltedLines(props) {
-  var enableDegeneration = true;
+  const [enableDegeneration, setEnableDegeneration] = useState(true);
+  // const [regen, setRegen] = useState(true);
+  const { regen, setRegen } = props;
   var step = 20;
   var border = 0;
   let scale = 500;
@@ -32,8 +37,7 @@ export default function TiltedLines(props) {
       p5.line(x + width, y, x, y + height);
     }
   }
-
-  const draw = (p5: P5) => {
+  let draw = (p5: P5) => {
     p5.background("fff");
     for (var x = border; x < scale - border; x += step) {
       for (var y = border; y < scale - border; y += step) {
@@ -54,18 +58,31 @@ export default function TiltedLines(props) {
     }
     p5.noLoop();
   };
-  return (
-    <Card align="center">
-      <CardHeader>
-        <Heading size="lg">Tilted Lines</Heading>
-      </CardHeader>
+  useEffect(() => {
+    setRegen(true);
+  }, [regen]);
 
-      <CardBody>
-        <Sketch setup={props.setup} draw={draw} />
-      </CardBody>
-      <CardFooter>
-        {props.artName}/{props.artworkCount}
-      </CardFooter>
-    </Card>
+  return (
+    <>
+      <Card align="center">
+        <CardHeader>
+          <Heading size="lg">Tilted Lines</Heading>
+        </CardHeader>
+
+        <CardBody>
+          {regen ? <Sketch setup={props.setup} draw={draw} /> : <></>}
+          {/* <Sketch setup={props.setup} draw={draw} /> */}
+        </CardBody>
+        <CardFooter>
+          {props.artName}/{props.artworkCount}
+        </CardFooter>
+      </Card>
+      {/* <Checkbox
+        defaultChecked
+        onClick={() => setEnableDegeneration(!enableDegeneration)}
+      >
+        Enable Degeneration
+      </Checkbox> */}
+    </>
   );
 }

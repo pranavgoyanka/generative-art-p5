@@ -1,8 +1,8 @@
 import P5 from "p5";
-import Waves from "./Waves";
+import Waves from "./artworks/Waves";
 // import "./App.css";
 // import "./Aesthetic.css";
-import TiltedLines from "./TiltedLines";
+import TiltedLines from "./artworks/TiltedLines";
 import {
   Card,
   CardHeader,
@@ -18,13 +18,18 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import Art from "./Art";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  RepeatIcon,
+} from "@chakra-ui/icons";
 function App() {
   const canvasSize = 250;
   const setup = (p5: P5, canvasParentRef: Element) => {
     p5.createCanvas(canvasSize, canvasSize).parent(canvasParentRef);
   };
 
-  const [regen, setRegen] = useState(1);
+  const [regen, setRegen] = useState(true);
   const [artName, setArtName] = useState(0);
   const artworkCount = 2;
   // const [value, setValue] = useControllableState({  40 });
@@ -41,15 +46,25 @@ function App() {
           artName={artName}
           artworkCount={artworkCount}
           regen={regen}
+          setRegen={setRegen}
         />
         <Stack direction="row" spacing={4}>
-          <Button
+          {/* <Button
             colorScheme="purple"
             variant="outline"
             onClick={() => setArtName((1 + artName) % artworkCount)}
           >
             Next
-          </Button>
+          </Button> */}
+          <RepeatIcon onClick={() => setRegen(false)} boxSize={5} />
+          <ChevronLeftIcon
+            onClick={() => setArtName(Math.abs(artName - 1) % artworkCount)}
+            boxSize={6}
+          />
+          <ChevronRightIcon
+            onClick={() => setArtName((1 + artName) % artworkCount)}
+            boxSize={6}
+          />
           {/* <Button
             colorScheme="purple"
             variant="outline"
